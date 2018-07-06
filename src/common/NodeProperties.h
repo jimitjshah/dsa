@@ -12,10 +12,14 @@
 
 class NodeProperties {
 public:
-	NodeProperties(uint32_t value, int32_t weight);
+	NodeProperties(uint32_t value, int32_t weight) : value_(value),
+																	weight_(weight)
+	{}
+
 	virtual ~NodeProperties();
-	uint32_t getValue() const;
-	int32_t getWeight() const;
+
+	void setValue(uint32_t value);
+	void setWeight(int32_t weight);
 
 private:
 	uint32_t value_;

@@ -1,23 +1,11 @@
-/*
- * NodeProperties.cpp
- *
- *  Created on: Jul 5, 2018
- *      Author: jshah
- */
+#include"NodeProperties.h"
 
-#include "NodeProperties.h"
-
-NodeProperties::NodeProperties(uint32_t val, int32_t wt) :value_(val),
-														  weight_(wt)
-{}
-
-NodeProperties::~NodeProperties() {
+void
+NodeProperties::setValue(uint32_t value) {
+	value_ = value;
 }
 
-uint32_t NodeProperties::getValue() const {
-	return value_;
-}
-
-int32_t NodeProperties::getWeight() const {
-	return weight_;
+void
+NodeProperties::setWeight(int32_t weight) {
+	weight_ = weight;
 }
