@@ -5,6 +5,7 @@
  *      Author: jshah
  */
 
+#include <iostream>
 #include "SparseGraph.h"
 
 class GraphNode;
@@ -39,7 +40,6 @@ SparseGraph::lookupNode(uint32_t v, uint32_t w) {
 	return nullptr;
 }
 
-
 void
 SparseGraph::addEdge(uint32_t v, uint32_t w, int32_t weight) {
 	auto nodeFound = lookupNode(v, w);
@@ -57,5 +57,33 @@ SparseGraph::addEdge(uint32_t v, uint32_t w, int32_t weight) {
 
 void
 SparseGraph::addEdge(uint32_t v, uint32_t w) {
+	auto nodeFound = lookupNode(v, w);
+	if (nodeFound == nullptr) {
+		auto temp = new GraphNode(w, GraphNode::GRAPH_CONST_WT);
+		std::map<uint32_t, NodeList>::iterator adjItr = adjVertices_.find(v);
+		if (adjItr != adjVertices_.end()) {
+			NodeList list = adjItr->second;
+			list.push_back(temp);
+		}
+	}
+}
 
+std::ostream& operator<<(std::ostream& os, const NodeList& nodeList) {
+	for (auto node : nodeList) {
+		os << "node.prop.getValue()" << "\t";
+	}
+	os << "\n";
+
+	return os;
+}
+
+void
+SparseGraph::toString() {
+	std::cout << "*********** Graph ***********\n";
+
+	std::map<uint32_t, NodeList>::iterator adjItr = adjVertices_.begin();
+	for ( ; adjItr != adjVertices_.end(); ++adjItr) {
+		std::cout << adjItr->second << "\t";
+	}
+	std::cout << "*********** End ***********\n";
 }

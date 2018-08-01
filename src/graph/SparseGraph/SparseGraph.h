@@ -31,6 +31,8 @@ public:
 	  return adjListItr->second.begin();
 	}
 
+	void toString();
+
 private:
 	GraphNode* lookupNode(uint32_t v, uint32_t w);
     std::map<uint32_t,NodeList > adjVertices_;
