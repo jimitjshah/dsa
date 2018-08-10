@@ -28,14 +28,14 @@ public:
 
 	NodeList::iterator adj(uint32_t v) {
 	  auto adjListItr = adjVertices_.find(v);
-	  return adjListItr->second.begin();
+	  return adjListItr->second->begin();
 	}
 
 	void toString();
 
 private:
 	GraphNode* lookupNode(uint32_t v, uint32_t w);
-    std::map<uint32_t,NodeList > adjVertices_;
+    std::map<uint32_t,NodeList* > adjVertices_;
 };
 
 #endif /* SRC_GRAPH_SPARSEGRAPH_SPARSEGRAPH_H_ */
