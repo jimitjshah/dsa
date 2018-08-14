@@ -9,4 +9,6 @@
 
 BaseGraph::BaseGraph() : numEdges_(0) {}
 
-BaseGraph::~BaseGraph() {}
+BaseGraph::~BaseGraph() {
+	vertices_.clear();
+}

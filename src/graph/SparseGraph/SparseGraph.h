@@ -21,10 +21,10 @@ typedef std::vector<GraphNode*> NodeList;
 class SparseGraph : public BaseGraph {
 public:
 	SparseGraph();
-	~SparseGraph();
+	virtual ~SparseGraph();
 
-	void addEdge(uint32_t v, uint32_t w, int32_t weight);
-	void addEdge(uint32_t v, uint32_t w);
+	virtual void addEdge(uint32_t v, uint32_t w, int32_t weight);
+	virtual void addEdge(uint32_t v, uint32_t w);
 
 	NodeList::iterator adj(uint32_t v) {
 	  auto adjListItr = adjVertices_.find(v);
@@ -32,6 +32,9 @@ public:
 	}
 
 	void toString(std::ostream& os) const;
+
+protected:
+	using base_type = SparseGraph;
 
 private:
 	GraphNode* lookupNode(uint32_t v, uint32_t w);
