@@ -98,15 +98,14 @@ SparseGraph::addEdge(uint32_t v, uint32_t w) {
 }
 
 void
-SparseGraph::toString() {
-	std::cout << "*********** Graph ***********\n";
-	std::cout << "V = " << V() << ", E = " << E() << std::endl;
-	std::map<uint32_t, NodeList*>::iterator adjItr = adjVertices_.begin();
+SparseGraph::toString(std::ostream& os) const {
+	os << "*********** Graph ***********\n";
+	os << "V = " << V() << ", E = " << E() << std::endl;
+	std::map<uint32_t, NodeList*>::const_iterator adjItr = adjVertices_.begin();
 	for ( ; adjItr != adjVertices_.end(); ++adjItr) {
-		std::cout << adjItr->first;
-		std::cout << *adjItr->second;
-		std::cout << std::endl;
+		os << adjItr->first;
+		os << *adjItr->second;
+		os << std::endl;
 	}
-
-	std::cout << "*********** End ***********\n";
+	os << "*********** End ***********\n";
 }

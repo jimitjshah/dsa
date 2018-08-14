@@ -1,6 +1,11 @@
 #include <iostream>
 #include "SparseGraph.h"
 
+std::ostream& operator<<(std::ostream& os, const SparseGraph& graph) {
+	graph.toString(os);
+	return os;
+}
+
 //For testing only
 int main(void) {
     printf("Starting dsa_test\n");
@@ -22,6 +27,6 @@ int main(void) {
     g.addEdge(9,11);
     g.addEdge(11,8);
 
-    g.toString();
+    std::cout << g;
 	return 0;
 }

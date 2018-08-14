@@ -31,7 +31,7 @@ public:
 	  return adjListItr->second->begin();
 	}
 
-	void toString();
+	void toString(std::ostream& os) const;
 
 private:
 	GraphNode* lookupNode(uint32_t v, uint32_t w);

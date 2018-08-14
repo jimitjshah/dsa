@@ -6,6 +6,7 @@
  */
 
 #include <vector>
+#include <ostream>
 
 #include "GraphNode.h"
 
@@ -27,7 +28,7 @@ public:
 	uint32_t E() const { return numEdges_; }
 
 	virtual NodeList::iterator adj(uint32_t v) = 0;	//Returns startnode of adj list
-	virtual void toString() = 0;
+	virtual void toString(std::ostream& os) const = 0;
 
 protected:
 
