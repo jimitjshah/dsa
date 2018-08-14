@@ -28,7 +28,8 @@ public:
 
 	virtual NodeList::iterator adj(uint32_t v) = 0;	//Returns startnode of adj list
 	virtual void toString() = 0;
-private:
+
+protected:
 
     uint32_t numVertices_;
     uint32_t numEdges_;

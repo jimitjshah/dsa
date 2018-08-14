@@ -8,7 +8,17 @@
 #include <iostream>
 #include "SparseGraph.h"
 
+//#define DEBUG
+
 class GraphNode;
+
+std::ostream& operator<<(std::ostream& os, const NodeList& nodeList) {
+	for (auto node : nodeList) {
+		os << " -> " << node->prop.getValue();
+	}
+
+	return os;
+}
 
 SparseGraph::SparseGraph() : BaseGraph() {
 }
@@ -52,8 +62,14 @@ SparseGraph::addEdge(uint32_t v, uint32_t w, int32_t weight) {
 		if (adjItr != adjVertices_.end()) {
 			NodeList* list = adjItr->second;
 			list->push_back(temp);
+		} else {
+			std::vector<GraphNode*>* newList = new NodeList();
+			newList->push_back(temp);
+			adjVertices_[v] = newList;
+			numVertices_++;
 		}
 	}
+	numEdges_++;
 }
 
 void
@@ -69,26 +85,28 @@ SparseGraph::addEdge(uint32_t v, uint32_t w) {
 			std::vector<GraphNode*>* newList = new NodeList();
 			newList->push_back(temp);
 			adjVertices_[v] = newList;
+			numVertices_++;
 		}
+#ifdef DEBUG
+		std::cout << "\naddEdge(" << v << ", " << w << "):\t";
+		std::map<uint32_t, NodeList*>::iterator pItr = adjVertices_.find(v);
+		NodeList* nodelist = pItr->second;
+		std::cout << *nodelist;
+#endif
+		numEdges_++;
 	}
-}
-
-std::ostream& operator<<(std::ostream& os, const NodeList& nodeList) {
-	for (auto node : nodeList) {
-		os << node->prop.getValue() << "\t";
-	}
-	os << "\n";
-
-	return os;
 }
 
 void
 SparseGraph::toString() {
 	std::cout << "*********** Graph ***********\n";
-
+	std::cout << "V = " << V() << ", E = " << E() << std::endl;
 	std::map<uint32_t, NodeList*>::iterator adjItr = adjVertices_.begin();
 	for ( ; adjItr != adjVertices_.end(); ++adjItr) {
-		std::cout << *adjItr->second << "\t";
+		std::cout << adjItr->first;
+		std::cout << *adjItr->second;
+		std::cout << std::endl;
 	}
+
 	std::cout << "*********** End ***********\n";
 }
