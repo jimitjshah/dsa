@@ -5,6 +5,7 @@
  *      Author: jshah
  */
 
+#include <set>
 #include <vector>
 #include <ostream>
 
@@ -24,7 +25,7 @@ public:
 	virtual void addEdge(uint32_t v, uint32_t w, int32_t weight) = 0;
 	virtual void addEdge(uint32_t v, uint32_t w) = 0;
 
-	uint32_t V() const { return numVertices_; }
+	uint32_t V() const { return vertices_.size(); }
 	uint32_t E() const { return numEdges_; }
 
 	virtual NodeList::iterator adj(uint32_t v) = 0;	//Returns startnode of adj list
@@ -32,8 +33,8 @@ public:
 
 protected:
 
-    uint32_t numVertices_;
     uint32_t numEdges_;
+    std::set<uint32_t> vertices_;
 };
 
 #endif /* SRC_GRAPH_BASEGRAPH_H_ */

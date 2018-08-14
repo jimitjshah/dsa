@@ -66,10 +66,11 @@ SparseGraph::addEdge(uint32_t v, uint32_t w, int32_t weight) {
 			std::vector<GraphNode*>* newList = new NodeList();
 			newList->push_back(temp);
 			adjVertices_[v] = newList;
-			numVertices_++;
+			vertices_.insert(v);
 		}
 	}
 	numEdges_++;
+	vertices_.insert(w);
 }
 
 void
@@ -85,7 +86,7 @@ SparseGraph::addEdge(uint32_t v, uint32_t w) {
 			std::vector<GraphNode*>* newList = new NodeList();
 			newList->push_back(temp);
 			adjVertices_[v] = newList;
-			numVertices_++;
+			vertices_.insert(v);
 		}
 #ifdef DEBUG
 		std::cout << "\naddEdge(" << v << ", " << w << "):\t";
@@ -94,6 +95,7 @@ SparseGraph::addEdge(uint32_t v, uint32_t w) {
 		std::cout << *nodelist;
 #endif
 		numEdges_++;
+		vertices_.insert(w);
 	}
 }
 
@@ -101,11 +103,15 @@ void
 SparseGraph::toString(std::ostream& os) const {
 	os << "*********** Graph ***********\n";
 	os << "V = " << V() << ", E = " << E() << std::endl;
-	std::map<uint32_t, NodeList*>::const_iterator adjItr = adjVertices_.begin();
-	for ( ; adjItr != adjVertices_.end(); ++adjItr) {
-		os << adjItr->first;
-		os << *adjItr->second;
-		os << std::endl;
+	for (auto u : vertices_) {
+	    os << u;
+		std::map<uint32_t, NodeList*>::const_iterator adjItr = adjVertices_.find(u);
+		if (adjItr != adjVertices_.end()) {
+		    NodeList* list = adjItr->second;
+		    os << *list;
+		}
+	    os << std::endl;
 	}
+
 	os << "*********** End ***********\n";
 }
