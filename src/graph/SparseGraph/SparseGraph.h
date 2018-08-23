@@ -26,9 +26,9 @@ public:
 	virtual void addEdge(uint32_t v, uint32_t w, int32_t weight);
 	virtual void addEdge(uint32_t v, uint32_t w);
 
-	NodeList::iterator adj(uint32_t v) {
+	NodeList* adj(uint32_t v) const {
 	  auto adjListItr = adjVertices_.find(v);
-	  return adjListItr->second->begin();
+	  return adjListItr->second;
 	}
 
 	void toString(std::ostream& os) const;
