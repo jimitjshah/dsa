@@ -48,10 +48,11 @@ DfsVisitor::visit_(uint32_t v)
 
     	  visit_(nodeValue);
 
-    	  assert(nodeValue == visitStack_.top());
+    	  std::cout << "nodeValue = " << nodeValue << " stackTop = " << visitStack_.top() << std::endl;
 
     	  visitStack_.pop();
       }
+      adjItr++;
 	}
 
 	finishVertex(v);

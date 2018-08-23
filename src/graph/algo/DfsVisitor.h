@@ -10,6 +10,7 @@
 
 #include <stack>
 #include <map>
+#include <iostream>
 
 class GraphNode;
 class SparseGraph;
@@ -25,19 +26,29 @@ public:
 
 	//From Boost - Visitor APIs
 	//Initialize Vertex - called when initializing all vertices
-	virtual void initVertex(uint32_t v) {};
+	virtual void initVertex(uint32_t v) {
+		std::cout << __FUNCTION__ << " : " << v << "\n";
+	};
 
 	//Start Vertex - called once for source vertex before traversal
-	virtual void startVertex(uint32_t v) {};
+	virtual void startVertex(uint32_t v) {
+		std::cout << __FUNCTION__ << " : " << v << "\n";
+	};
 
 	//Discover Vertex - called for each newly discovered vertex
-	virtual void visitVertex(uint32_t v) {};
+	virtual void visitVertex(uint32_t v) {
+		std::cout << __FUNCTION__ << " : " << v << "\n";
+	};
 
 	//Finish Vertex - called for each vertex completed
-	virtual void finishVertex(uint32_t v) {};
+	virtual void finishVertex(uint32_t v) {
+		std::cout << __FUNCTION__ << " : " << v << "\n";
+	};
 
 	//Examine Edge - called for each new edge
-	virtual void examineEdge(uint32_t fromV, uint32_t toV) {};
+	virtual void examineEdge(uint32_t fromV, uint32_t toV) {
+		std::cout << __FUNCTION__ << ": " << fromV << "->" << toV << "\n";
+};
 
 	//Tree Edge - called for each edge that becomes a part of the search tree
 	//Back Edge - reverse path of search tree
