@@ -30,8 +30,10 @@
 *.exe
 *.out
 *.app
+dsa_test
 
 .cproject
 .project
 .settings
 .gitignore
+/Default/
