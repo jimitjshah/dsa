@@ -2,6 +2,7 @@
 #include "DirectedGraph.h"
 #include "UndirectedGraph.h"
 #include "DfsVisitor.h"
+#include "BfsVisitor.h"
 
 std::ostream& operator<<(std::ostream& os, const DirectedGraph& graph) {
 	os << "DirectedGraph\n";
@@ -62,5 +63,10 @@ int main(void) {
     DfsVisitor visitor(&g2);
     visitor.Init(1);
     visitor.Visit();
+
+    std::cout << "\nBfsVisitor\n";
+    BfsVisitor bfsVisitor(&g2);
+    bfsVisitor.Init(1);
+    bfsVisitor.Visit();
 	return 0;
 }

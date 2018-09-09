@@ -35,9 +35,10 @@ DfsVisitor::visit_(uint32_t v)
 {
 	assert(!visited_[v]);
 	visitStack_.push(v);
-	visited_[v] = true;
 
 	visitVertex(v);
+	visited_[v] = true;
+
 	NodeList* adjList = graph_->adj(v);
 	NodeList::iterator adjItr = adjList->begin();
 	while (adjItr != adjList->end()) {
