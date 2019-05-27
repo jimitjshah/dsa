@@ -1,6 +1,6 @@
 #include "BfsWallsAndGates.h"
 
-static int INFINITY = ((2U << 31) - 1);
+static int INFINITY = ((1U << 31) - 1);
 
 static int min_value(int v1, int v2) {
   if (v1 < v2) return v1;
@@ -16,22 +16,22 @@ BfsWallsAndGates::wallsAndGates(std::vector< std::vector<int> >& rooms) {
 	}
 
 	for (int i = 0; i < nRows; ++i) {
-		for (int j = 0; i < nCols; ++j) {
+		for (int j = 0; j < nCols; ++j) {
 			if (rooms[i][j] == INFINITY) {
-				rooms[i][j] = minDistanceToGate(rooms, i, j);
+				rooms[i][j] = minDistanceToGate(rooms, i, j, 1);
 			}
 		}
 	}
 }
 
 int
-BfsWallsAndGates::minDistanceToGate(std::vector<std::vector<int>>& rooms, int row, int col) {
+BfsWallsAndGates::minDistanceToGate(std::vector<std::vector<int>>& rooms, int row, int col, int dist) {
 	int nRows = rooms.size();
 	int nCols = rooms[0].size();
 	if (row < 0 || col < 0 || row >= nRows || col >= nCols || (rooms[row][col] == -1)) {
 		return INFINITY;
 	} else if (rooms[row][col] == 0) {
-		return 1;
+		return dist;
 	} else if (rooms[row][col] > 0 && rooms[row][col] < INFINITY) {
 		return rooms[row][col];
 	}
@@ -48,13 +48,13 @@ BfsWallsAndGates::minDistanceToGate(std::vector<std::vector<int>>& rooms, int ro
 	while (!bfsQ.empty()) {
 		Cell seed = bfsQ.front();
 		bfsQ.pop();
-		curMinDist = min_value(curMinDist, minDistanceToGate(rooms, seed.row, seed.col));
+		curMinDist = min_value(curMinDist, minDistanceToGate(rooms, seed.row, seed.col, dist++));
 	}
 	return curMinDist;
 }
 
 void
 BfsWallsAndGates::TestDriver() {
-	std::vector< std::vector<int> > rooms = { { 3, -1, 0, 1 } }; //, { 2, 2, 1, -1 }, { 1, -1, 2, -1 }, { 0, -1, 3, 4 } };
+	std::vector< std::vector<int> > rooms = { { INFINITY, -1, 0, 1 }, { 2, 2, 1, -1 } }; //, { 1, -1, 2, -1 }, { 0, -1, 3, 4 } };
 	wallsAndGates(rooms);
 }

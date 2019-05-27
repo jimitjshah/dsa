@@ -19,7 +19,7 @@ public:
     void TestDriver();
 
   private:
-  int minDistanceToGate(std::vector< std::vector<int> >& rooms, int row, int col);
+  int minDistanceToGate(std::vector< std::vector<int> >& rooms, int row, int col, int dist);
 
   std::queue<Cell> bfsQ;
   int nRows, nCols;
