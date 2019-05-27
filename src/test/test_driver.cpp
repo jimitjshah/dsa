@@ -3,6 +3,8 @@
 #include "UndirectedGraph.h"
 #include "DfsVisitor.h"
 #include "BfsVisitor.h"
+#include "circularqueue.h"
+#include "BfsWallsAndGates.h"
 
 std::ostream& operator<<(std::ostream& os, const DirectedGraph& graph) {
 	os << "DirectedGraph\n";
@@ -16,8 +18,8 @@ std::ostream& operator<<(std::ostream& os, const UndirectedGraph& graph) {
 	return os;
 }
 
-//For testing only
-int main(void) {
+void testGraph()
+{
     printf("Starting dsa_test\n");
     DirectedGraph g1;
 
@@ -68,5 +70,31 @@ int main(void) {
     BfsVisitor bfsVisitor(&g2);
     bfsVisitor.Init(1);
     bfsVisitor.Visit();
+}
+
+void testCircularQueue()
+{
+	  int value = 1;
+	  MyCircularQueue* obj = new MyCircularQueue(3);
+	  std::cout << obj << std::endl;
+	  bool param_1 = obj->enQueue(value++);
+	  std::cout << param_1 << std::endl;
+	  bool param_2 = obj->deQueue();
+	  std::cout << param_2 << std::endl;
+	  int param_3 = obj->Front();
+	  std::cout << param_3 << std::endl;
+	  int param_4 = obj->Rear();
+	  std::cout << param_4 << std::endl;
+	  bool param_5 = obj->isEmpty();
+	  std::cout << param_5 << std::endl;
+	  bool param_6 = obj->isFull();
+	  std::cout << param_6 << std::endl;
+}
+
+//For testing only
+int main(void) {
+//	testCircularQueue();
+	BfsWallsAndGates wag;
+	wag.TestDriver();
 	return 0;
 }
